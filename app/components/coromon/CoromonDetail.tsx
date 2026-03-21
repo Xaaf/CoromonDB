@@ -1,5 +1,5 @@
 import { typeColors } from "@/lib/types/typeColors";
-import StatBar from "../StatBar";
+import StatBar from "./StatBar";
 import { getMaxStats } from "@/lib/utils";
 
 export default async function CoromonDetail({ coromon }: { coromon: any }) {
