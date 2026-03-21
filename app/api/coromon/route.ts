@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 
     // No slug so we're searching instead
     if (search) {
-        query = query.ilike("name", `%${search}%`);
+        query = query.ilike("slug", `%${search}%`);
     }
 
     const { data, error } = await query;

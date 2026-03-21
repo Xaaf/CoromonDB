@@ -1,21 +1,20 @@
 type Props = {
     label: string,
-    value: number
+    value: number,
+    maxStats: Record<string, number>
 }
 
-export default function StatBar({ label, value }: Props) {
-    const MAX_STAT = 150;   // TODO: Query the database for the highest stat instead
-    // Also, determine whether we want this MAX_STAT to be
-    // universal over all stats, or if it depends *on* the stat
+export default function StatBar({ label, value, maxStats }: Props) {
+    const MAX_STAT = maxStats[label] || 100;
     const width = `${(value / MAX_STAT) * 100}%`;
 
-    // TODO: Determine some *actual* points for this, maybe x% of the `MAX_STAT`?
     const bad_stat_cutoff = 0;
-    const mid_stat_cutoff = 50;
-    const ok_stat_cutoff = 80;
-    const good_stat_cutoff = 110;
+    const mid_stat_cutoff = MAX_STAT / 100 * 25;
+    const ok_stat_cutoff = MAX_STAT / 100 * 50;
+    const good_stat_cutoff = MAX_STAT / 100 * 75;
 
-    let color = "bg-red-500";
+    let color = "bg-gray-900";
+    if (value >= bad_stat_cutoff) color = "bg-red-500";
     if (value >= mid_stat_cutoff) color = "bg-orange-400";
     if (value >= ok_stat_cutoff) color = "bg-yellow-400";
     if (value >= good_stat_cutoff) color = "bg-green-500";

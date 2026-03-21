@@ -1,7 +1,8 @@
 import { typeColors } from "@/lib/types/typeColors";
 import StatBar from "../StatBar";
+import { getMaxStats } from "@/lib/utils";
 
-export default function CoromonDetail({ coromon }: { coromon: any }) {
+export default async function CoromonDetail({ coromon }: { coromon: any }) {
     const totalBST = coromon.stat_hp
         + coromon.stat_speed
         + coromon.stat_attack
@@ -9,6 +10,8 @@ export default function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp_attack
         + coromon.stat_sp_defense
         + coromon.stat_sp;
+    
+    const maxStats = await getMaxStats();
 
     return (
         <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-xl shadow p-6">
@@ -49,13 +52,13 @@ export default function CoromonDetail({ coromon }: { coromon: any }) {
                     </p>
 
                     <div className="space-y-3">
-                        <StatBar label="HP" value={coromon.stat_hp} />
-                        <StatBar label="Speed" value={coromon.stat_speed} />
-                        <StatBar label="Attack" value={coromon.stat_attack} />
-                        <StatBar label="Defense" value={coromon.stat_defense} />
-                        <StatBar label="Sp. Attack" value={coromon.stat_sp_attack} />
-                        <StatBar label="Sp. Defense" value={coromon.stat_sp_defense} />
-                        <StatBar label="SP" value={coromon.stat_sp} />
+                        <StatBar label="HP" value={coromon.stat_hp} maxStats={maxStats} />
+                        <StatBar label="Speed" value={coromon.stat_speed} maxStats={maxStats} />
+                        <StatBar label="Attack" value={coromon.stat_attack} maxStats={maxStats} />
+                        <StatBar label="Defense" value={coromon.stat_defense} maxStats={maxStats} />
+                        <StatBar label="Sp. Attack" value={coromon.stat_sp_attack} maxStats={maxStats} />
+                        <StatBar label="Sp. Defense" value={coromon.stat_sp_defense} maxStats={maxStats} />
+                        <StatBar label="SP" value={coromon.stat_sp} maxStats={maxStats} />
                     </div>
                 </div>
             </div>
