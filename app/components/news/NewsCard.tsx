@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type NewsCardProps = {
     title: string;
     excerpt: string;
@@ -7,12 +9,21 @@ type NewsCardProps = {
     image?: string;
 };
 
+const IMAGE_WIDTH: number = 800;
+const IMAGE_HEIGHT: number = 400;
+
 export default function NewsCard({ title, excerpt, date, link, author, image }: NewsCardProps) {
     return (
         <a href={link} className="block bg-surface dark:bg-surface-dark rounded-xl shadow p-6 hover:shadow-lg transition">
             {image && (
                 <div className="mb-4">
-                <img src={image} alt={title} className="w-full h-48 object-cover rounded-lg" />
+                    <Image 
+                        src={image}
+                        alt={title}
+                        width={IMAGE_WIDTH}
+                        height={IMAGE_HEIGHT}
+                        className="w-full h-48 object-cover rounded-lg"
+                    />
                 </div>
             )}
             
@@ -21,8 +32,10 @@ export default function NewsCard({ title, excerpt, date, link, author, image }: 
             </h2>
 
             <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-2">
-                <span>{date}</span>
-                {author && <span className="ml-2">- written by {author}</span>}
+                <span>
+                    {date}
+                    {author && ", written by " + author}
+                </span>
             </div>
 
             <p className="text-[var(--color-text)] dark:text-[var(--color-text-dark)]">{excerpt}</p>

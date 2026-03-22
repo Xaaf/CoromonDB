@@ -27,18 +27,21 @@ export default async function Home() {
                         <NewsCard
                             title="Coromon Remastered update is out on Steam!"
                             excerpt="An update with a major UI overhaul has arrived on Steam. The update also includes
-                                        a number of bugfixes and some engine upgrades!"
+                                        a number of bugfixes and some engine upgrades! In this post, we'll go over all
+                                        the changes made in the update."
                             date="March 19th, 2026"
                             link="news/patch-coromon-remastered"
+                            image="/images/coromon_remastered.png"
                             author="Xaaf"
                         />
 
                         <NewsCard
                             title="Coromon Rogue Planet - September Progress"
                             excerpt="The developers recently shared information on their progress with the spin-off
-                                        Coromon Rogue Planet."
+                                        Coromon Rogue Planet. In this post, we'll discuss the newly shared information!"
                             date="September 16th, 2025"
                             link="news/rogue-planet-september-update"
+                            image="/images/coromon_rogue_planet.png"
                             author="Xaaf"
                         />                        
                     </main>
