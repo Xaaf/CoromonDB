@@ -6,7 +6,7 @@ type Props = {
 
 export default function StatBar({ label, value, maxStats }: Props) {
     const MAX_STAT = maxStats[label] || 100;
-    const width = `${(value / MAX_STAT) * 100}%`;
+    const width = `${Math.max(0, Math.min(100, value / MAX_STAT * 100))}%`;
 
     const bad_stat_cutoff = 0;
     const mid_stat_cutoff = MAX_STAT / 100 * 25;
@@ -14,10 +14,10 @@ export default function StatBar({ label, value, maxStats }: Props) {
     const good_stat_cutoff = MAX_STAT / 100 * 75;
 
     let color = "bg-gray-900";
-    if (value >= bad_stat_cutoff) color = "bg-red-500";
+    if (value >= bad_stat_cutoff) color = "bg-red-400";
     if (value >= mid_stat_cutoff) color = "bg-orange-400";
-    if (value >= ok_stat_cutoff) color = "bg-yellow-400";
-    if (value >= good_stat_cutoff) color = "bg-green-500";
+    if (value >= ok_stat_cutoff) color = "bg-yellow-300";
+    if (value >= good_stat_cutoff) color = "bg-green-400";
 
     return (
         <div>
