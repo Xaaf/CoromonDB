@@ -10,7 +10,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp_attack
         + coromon.stat_sp_defense
         + coromon.stat_sp;
-    
+
     const maxStats = await getMaxStats();
 
     return (
@@ -60,6 +60,32 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                         <StatBar label="Sp. Defense" value={coromon.stat_sp_defense} maxStats={maxStats} />
                         <StatBar label="SP" value={coromon.stat_sp} maxStats={maxStats} />
                     </div>
+                </div>
+            </div>
+
+            <br />
+
+            <h1 className="text-2xl font-bold mb-2">
+                Skillset
+            </h1>
+
+            <div className="grid md:grid-cols-2 gap-8">
+                {/* LEFT COLUMN */}
+                <div>
+                    <h1 className="font-bold mb-2">
+                        Level Up
+                    </h1>
+
+                    <p>Table goes here...</p>
+                </div>
+
+                {/* RIGHT COLUMN */}
+                <div>
+                    <h1 className="font-bold mb-2">
+                        Skill Flash
+                    </h1>
+
+                    <p>Table goes here...</p>
                 </div>
             </div>
         </div>
