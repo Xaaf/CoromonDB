@@ -20,10 +20,16 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                 {/* LEFT COLUMN */}
                 <div>
                     <h1 className="text-3xl font-bold mb-2">
-                        #{coromon.corodex_number} {coromon.name}
+                        {coromon.corodex_number > 0 ? `#${coromon.corodex_number}` : "#???"} {coromon.name}
                     </h1>
 
                     <div className="flex gap-2 mb-4">
+                        {coromon.corodex_number < 0 && (
+                            <span className="px-3 py-1 rounded-full text-sm font-semibold">
+                                Titan
+                            </span>
+                        )}
+
                         <span className={`px-3 py-1 rounded-full text-sm font-semibold ${typeColors[coromon.primary_type]}`}>
                             {coromon.primary_type}
                         </span>
