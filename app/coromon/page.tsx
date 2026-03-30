@@ -26,7 +26,21 @@ export default function CoromonPage() {
             async function fetchCoromon() {
                 const res = await fetch(`/api/coromon?search=${encodeURIComponent(search)}`)
                 const data = await res.json()
-                setCoromon(data)
+
+                // Filter out removed content Coromon
+                const filtered = data.filter((c: { corodex_number: number; }) => c.corodex_number >= -100);
+                const sorted = filtered.sort((a: { corodex_number: number; }, b: { corodex_number: number; }) => {
+                    if (a.corodex_number > 0 && b.corodex_number > 0) return a.corodex_number - b.corodex_number;
+                    if (a.corodex_number > 0) return -1;
+                    if (b.corodex_number > 0) return 1;
+
+                    if (a.corodex_number > b.corodex_number) return -1;
+                    if (a.corodex_number < b.corodex_number) return 1;
+
+                    return 0;
+                });
+
+                setCoromon(sorted)
                 didFinish = true
                 setLoading(false) // Instantly hide loading when data is received
             }
@@ -59,9 +73,9 @@ export default function CoromonPage() {
                     <Link key={c.id} href={`/coromon/${c.slug}`}>
                         <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] transition">
                             <h2 className="text-lg font-semibold mb-2">
-                                #{c.corodex_number} {c.name}
+                                {c.corodex_number > 0 ? `#${c.corodex_number}` : "#???"} {c.name}
                             </h2>
-                            
+
                             <p className="flex gap-2">
                                 <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[c.primary_type] || typeColors.Default}`}>
                                     {c.primary_type}
