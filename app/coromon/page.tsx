@@ -55,7 +55,25 @@ export default function CoromonPage() {
     }, [search]);
 
     return (
-        <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] p-6">
+        <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] p-6 space-y-6">
+            <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6 space-y-6">
+                {/* Quote */}
+                <div className="text-center">
+                    <p className="text-lg italic text-gray-600 dark:text-gray-400">
+                        "A travel journal: my journey across Velua" 
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                        - The Coromon Handbook
+                    </p>
+                </div>
+
+                {/* Content */}
+                <p>
+                    <span className="font-semibold">Coromon</span> are the wonderful creatures that inhabit this world. Each Coromon has its own unique set of Traits, Skills and most of them even have evolutions!
+                    This page contains a full list of all Coromon that we know of at this moment. At the very bottom, there is also a few entries for Coromon that do not have a Database number yet, including the all-powerful Titans!
+                </p>
+            </div>
+
             <h1 className="text-2xl font-bold mb-4">List of Coromon</h1>
 
             <input

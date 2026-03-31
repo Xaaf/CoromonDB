@@ -46,7 +46,7 @@ export default function TraitsPage() {
                 {/* Quote */}
                 <div className="text-center">
                     <p className="text-lg italic text-gray-600 dark:text-gray-400">
-                        “What makes a Coromon unique: Traits”
+                        "What makes a Coromon unique: Traits"
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                         - The Traits Handbook
