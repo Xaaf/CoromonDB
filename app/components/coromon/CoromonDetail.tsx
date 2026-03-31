@@ -30,7 +30,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                     <div className="flex gap-2 mb-4">
                         {coromon.corodex_number < 0 && (
                             <span className="px-3 py-1 rounded-full text-sm font-semibold">
-                                Titan
+                                {coromon.corodex_number < -100 ? "Cut Content" : "Titan"}
                             </span>
                         )}
 
