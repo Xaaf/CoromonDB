@@ -1,4 +1,10 @@
+import { typeColors } from "@/lib/types/typeColors";
+import Link from "next/dist/client/link";
+
 export default async function TraitDetail({ trait }: { trait: any }) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/traits/${trait.slug}/coromon`);
+    const coromonList = await res.json();
+
     return (
         <div className="space-y-6">
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6 space-y-6">
@@ -68,7 +74,34 @@ export default async function TraitDetail({ trait }: { trait: any }) {
             {/* --- COROMON WITH THE TRAIT --- */}
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
                 <h2 className="text-2xl font-bold mb-4">Coromon with this Trait</h2>
-                <p>List of Coromon with this trait will go here...</p>
+                {/* <p>List of Coromon with this trait will go here...</p> */}
+
+                {coromonList && coromonList.length > 0 ? (
+                    <div className="grid md:grid-cols-2 gap-4">
+                        {coromonList.map((coromon: any, idx: number) => (
+                            <Link key={coromon.id} href={`/coromon/${coromon.slug}`}>
+                                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] transition">
+                                    <h2 className="text-lg font-semibold mb-2">
+                                        {coromon.corodex_number > 0 ? `#${coromon.corodex_number}` : "#???"} {coromon.name}
+                                    </h2>
+
+                                    <p className="flex gap-2">
+                                        <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[coromon.primary_type] || typeColors.Default}`}>
+                                            {coromon.primary_type != "Fusebox" ? coromon.primary_type : "Normal"}
+                                        </span>
+                                        {coromon.secondary_type && (
+                                            <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[coromon.secondary_type] || typeColors.Default}`}>
+                                                {coromon.secondary_type}
+                                            </span>
+                                        )}
+                                    </p>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-gray-500 dark:text-gray-400">No traits for this Coromon.</p>
+                )}
             </div>
         </div>
     );
