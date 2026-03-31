@@ -43,7 +43,7 @@ export default function TraitsPage() {
     return (
         <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] p-6 space-y-6">
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6 space-y-6">
-                {/* Quote */}
+                {/* --- QUOTE --- */}
                 <div className="text-center">
                     <p className="text-lg italic text-gray-600 dark:text-gray-400">
                         "What makes a Coromon unique: Traits"
@@ -53,7 +53,7 @@ export default function TraitsPage() {
                     </p>
                 </div>
 
-                {/* Content */}
+                {/* --- DESCRIPTION --- */}
                 <p>
                     This game's version of passive/active abilities are called <span className="font-semibold">Traits</span>.
                     These are abilities triggered by certain conditions, without consuming any SP. Most Traits are passive, though a few are active and can be triggered manually -- usually
