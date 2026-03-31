@@ -96,7 +96,7 @@ export default function CoromonPage() {
 
                             <p className="flex gap-2">
                                 <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[c.primary_type] || typeColors.Default}`}>
-                                    {c.primary_type}
+                                    {c.primary_type != "Fusebox" ? c.primary_type : "Normal"}
                                 </span>
                                 {c.secondary_type && (
                                     <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[c.secondary_type] || typeColors.Default}`}>

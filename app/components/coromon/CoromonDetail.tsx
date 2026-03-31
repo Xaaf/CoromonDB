@@ -31,7 +31,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                         )}
 
                         <span className={`px-3 py-1 rounded-full text-sm font-semibold ${typeColors[coromon.primary_type]}`}>
-                            {coromon.primary_type}
+                            {coromon.primary_type != "Fusebox" ? coromon.primary_type : "Normal"}
                         </span>
                         {coromon.secondary_type && (
                             <span className={`px-3 py-1 rounded-full text-sm font-semibold ${typeColors[coromon.secondary_type]}`}>
