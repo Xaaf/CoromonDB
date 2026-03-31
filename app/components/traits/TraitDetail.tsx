@@ -81,9 +81,13 @@ export default async function TraitDetail({ trait }: { trait: any }) {
                         {coromonList.map((coromon: any, idx: number) => (
                             <Link key={coromon.id} href={`/coromon/${coromon.slug}`}>
                                 <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] transition">
-                                    <h2 className="text-lg font-semibold mb-2">
-                                        {coromon.corodex_number > 0 ? `#${coromon.corodex_number}` : "#???"} {coromon.name}
-                                    </h2>
+                                    <div className="flex justify-between items-start">
+                                        <h2 className="text-lg font-semibold mb-2">
+                                            {coromon.corodex_number > 0 ? `#${coromon.corodex_number}` : "#???"} {coromon.name}
+                                        </h2>
+
+                                        <span className="text-sm text-gray-500 dark:text-gray-400">Chance: x%</span>
+                                    </div>
 
                                     <p className="flex gap-2">
                                         <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[coromon.primary_type] || typeColors.Default}`}>
