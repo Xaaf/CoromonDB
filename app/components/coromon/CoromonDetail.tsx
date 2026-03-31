@@ -13,6 +13,10 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
 
     const maxStats = await getMaxStats();
 
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/${coromon.slug}/traits`);
+    const data = await res.json();
+    const traits = data.map((item: any) => item.traits);
+
     return (
         <div className="space-y-6">
             {/* --- HEADER CARD --- */}
@@ -95,7 +99,24 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
             {/* --- TRAITS SECTION --- */}
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
                 <h2 className="text-2xl font-bold mb-4">Traits</h2>
-                <p>Traits table goes here...</p>
+
+                {traits && traits.length > 0 ? (
+                    <div className="grid md:grid-cols-2 gap-4">
+                        {traits.map((trait: any, idx: number) => (
+                            <div key={idx} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                <h3 className="font-semibold mb-1">{trait.name}</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                                    {trait.type} {trait.cooldown ? `(Cooldown: ${trait.cooldown} minutes)` : ""}
+                                </p>
+
+                                <p className="text-sm mb-1">{trait.description}</p>
+                                <p className="font-semibold text-sm text-gray-400">Chance: {trait.chance}%</p>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-gray-500 dark:text-gray-400">No traits for this Coromon.</p>
+                )}
             </div>
         </div>
     );
