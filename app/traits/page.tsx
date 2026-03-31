@@ -56,7 +56,7 @@ export default function TraitsPage() {
                 {/* Content */}
                 <p>
                     This game's version of passive/active abilities are called <span className="font-semibold">Traits</span>.
-                    These are abilities triggered by certain conditions, without consuming any SP. Most Traits are passive, though a few are active and can be triggered manually—usually
+                    These are abilities triggered by certain conditions, without consuming any SP. Most Traits are passive, though a few are active and can be triggered manually -- usually
                     through a button in the summary screen. On this page, you'll find all of the <span className="font-semibold">Traits</span> in the game, as well as unused ones!
                 </p>
             </div>
