@@ -33,8 +33,7 @@ export async function GET(req: NextRequest) {
         cooldown,
         description,
         description_plus,
-        description_plus_plus,
-        chance
+        description_plus_plus
       )
     `)
         .eq("coromon_id", coromonId);

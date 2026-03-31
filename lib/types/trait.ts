@@ -4,7 +4,6 @@ export interface Trait {
     slug: string;
     is_active: boolean;
     cooldown: number | null;
-    chance: number;
     description: string;
     description_plus: string;
     description_plus_plus: string;
