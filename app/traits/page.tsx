@@ -26,19 +26,6 @@ export default function TraitsPage() {
                 const res = await fetch(`/api/traits?search=${encodeURIComponent(search)}`)
                 const data = await res.json()
 
-                // // Filter out removed content Coromon
-                // const filtered = data.filter((c: { corodex_number: number; }) => c.corodex_number >= -100);
-                // const sorted = filtered.sort((a: { corodex_number: number; }, b: { corodex_number: number; }) => {
-                //     if (a.corodex_number > 0 && b.corodex_number > 0) return a.corodex_number - b.corodex_number;
-                //     if (a.corodex_number > 0) return -1;
-                //     if (b.corodex_number > 0) return 1;
-
-                //     if (a.corodex_number > b.corodex_number) return -1;
-                //     if (a.corodex_number < b.corodex_number) return 1;
-
-                //     return 0;
-                // });
-
                 setTraits(data)
                 didFinish = true
                 setLoading(false) // Instantly hide loading when data is received
@@ -54,9 +41,27 @@ export default function TraitsPage() {
     }, [search]);
 
     return (
-        <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] p-6">
-            <h1 className="text-2xl font-bold mb-4">List of Traits</h1>
+        <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] p-6 space-y-6">
+            <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6 space-y-6">
+                {/* Quote */}
+                <div className="text-center">
+                    <p className="text-lg italic text-gray-600 dark:text-gray-400">
+                        “What makes a Coromon unique: Traits”
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                        - The Traits Handbook
+                    </p>
+                </div>
 
+                {/* Content */}
+                <p>
+                    This game's version of passive/active abilities are called <span className="font-semibold">Traits</span>.
+                    These are abilities triggered by certain conditions, without consuming any SP. Most Traits are passive, though a few are active and can be triggered manually—usually
+                    through a button in the summary screen. On this page, you'll find all of the <span className="font-semibold">Traits</span> in the game, as well as unused ones!
+                </p>
+            </div>
+
+            <h1 className="text-2xl font-bold mb-4">List of Traits</h1>
             <input
                 type="text"
                 placeholder="Search Traits..."
@@ -72,8 +77,12 @@ export default function TraitsPage() {
                     <Link key={trait.id} href={`/traits/${trait.slug}`}>
                         <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] transition">
                             <h2 className="text-lg font-semibold mb-2">
-                                {trait.name}
+                                {trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}
                             </h2>
+
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                {trait.isActive ? "Active" : "Passive"}
+                            </p>
                         </div>
                     </Link>
                 ))}
