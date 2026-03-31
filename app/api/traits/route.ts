@@ -21,7 +21,11 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: "Error fetching data" }, { status: 500 });
     }
 
-    console.log("Fetched traits: ", data);
+    // Map type → isActive
+    const mapped = data.map((t: any) => ({
+        ...t,
+        is_active: t.type === "Active",
+    }));
 
-    return NextResponse.json(data);
+    return NextResponse.json(mapped);
 }

@@ -76,12 +76,18 @@ export default function TraitsPage() {
                 {traits.map((trait) => (
                     <Link key={trait.id} href={`/traits/${trait.slug}`}>
                         <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] transition">
-                            <h2 className="text-lg font-semibold mb-2">
-                                {trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}
-                            </h2>
+                            <div className="flex justify-between items-start">
+                                <h2 className="text-lg font-semibold mb-2">
+                                    {trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}
+                                </h2>
+
+                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                    {trait.is_cut_content && "Unused"}
+                                </p>
+                            </div>
 
                             <p className="text-sm text-gray-500 dark:text-gray-400">
-                                {trait.isActive ? "Active" : "Passive"}
+                                {trait.is_active ? "Active" : "Passive"}
                             </p>
                         </div>
                     </Link>

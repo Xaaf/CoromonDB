@@ -6,6 +6,10 @@ export default async function TraitDetail({ trait }: { trait: any }) {
                 <div className="flex justify-between items-start">
                     <h1 className="text-3xl font-bold">
                         {trait.name}
+
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                            {trait.is_cut_content && "Unused"}
+                        </p>
                     </h1>
 
                     <div className="flex gap-2">
@@ -19,7 +23,7 @@ export default async function TraitDetail({ trait }: { trait: any }) {
                             </span>
                         )}
 
-                        {trait.isActive && (
+                        {trait.is_active && (
                             <span className="px-2 py-1 rounded-full text-xs font-semibold bg-gray-500 text-white">
                                 Cooldown: {trait.cooldown ? `${trait.cooldown} min` : "N/A"}
                             </span>
