@@ -1,4 +1,3 @@
-// app/api/coromon/[slug]/traits/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
@@ -45,7 +44,6 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: "Error fetching traits" }, { status: 500 });
     }
 
-    console.log(data);
-
-    return NextResponse.json(data);
+    const traits = data.map((item: any) => item.traits);
+    return NextResponse.json(traits);
 }

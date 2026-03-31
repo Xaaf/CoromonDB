@@ -14,8 +14,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
     const maxStats = await getMaxStats();
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/${coromon.slug}/traits`);
-    const data = await res.json();
-    const traits = data.map((item: any) => item.traits);
+    const traits = await res.json();
 
     return (
         <div className="space-y-6">
