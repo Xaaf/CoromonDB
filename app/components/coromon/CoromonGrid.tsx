@@ -9,7 +9,6 @@ import Image from "next/image";
 
 export default function CoromonGrid({ initialCoromon }: { initialCoromon: Coromon[] }) {
     const [search, setSearch] = useState("");
-    const [coromon, setCoromon] = useState<Coromon[]>(initialCoromon);
 
     function getIconUrl(c: Coromon) {
         let iconUrl = `${c.name.toLowerCase()}_normal.png`;
@@ -31,22 +30,13 @@ export default function CoromonGrid({ initialCoromon }: { initialCoromon: Coromo
         return data.publicUrl;
     }
 
-    useEffect(() => {
-        // Not using the search bar, so return early
-        if (!search) {
-            setCoromon(initialCoromon);
-            return;
-        }
-
-        const debounce = setTimeout(async () => {
-            const res = await fetch(`/api/coromon?search=${encodeURIComponent(search)}`);
-            const data = await res.json();
-
-            setCoromon(data);
-        }, 300);
-
-        return () => clearTimeout(debounce);
-    }, [search, initialCoromon]);
+    const filteredCoromon = search
+        ? initialCoromon.filter((coromon) =>
+            // Filtering on the slug to allow searching more easily, e.g. in Vorst's case
+            coromon.slug.toLowerCase().includes(search.toLowerCase())
+        )
+        .sort((a, b) => a.name.localeCompare(b.name))
+        : initialCoromon;
     
     return (
         <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] p-6 space-y-6">
@@ -79,7 +69,7 @@ export default function CoromonGrid({ initialCoromon }: { initialCoromon: Coromo
             />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {coromon.map((c) => (
+                {filteredCoromon.map((c) => (
                     <Link key={c.id} href={`/coromon/${c.slug}`}>
                         <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] transition flex items-center gap-4">
                             <div className="w-10 h-10 flex items-center justify-center">

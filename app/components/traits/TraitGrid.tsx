@@ -2,28 +2,18 @@
 
 import { Trait } from "@/lib/types/trait";
 import Link from "next/dist/client/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function TraitGrid({ initialTraits }: { initialTraits: Trait[] }) {
     const [search, setSearch] = useState("");
-    const [traits, setTraits] = useState<Trait[]>([]);
 
-    useEffect(() => {
-        // Not using the search bar, so return early
-        if (!search) {
-            setTraits(initialTraits);
-            return;
-        }
-
-        const debounce = setTimeout(async () => {
-            const res = await fetch(`/api/traits?search=${encodeURIComponent(search)}`);
-            const data = await res.json();
-
-            setTraits(data);
-        }, 300);
-
-        return () => clearTimeout(debounce);
-    }, [search, initialTraits]);
+    const filteredTraits = search
+        ? initialTraits.filter((trait) =>
+            // Filtering on the slug to allow searching more easily, e.g. in Vorst's case
+            trait.slug.toLowerCase().includes(search.toLowerCase())
+        )
+        .sort((a, b) => a.name.localeCompare(b.name))
+        : initialTraits;
 
     return (
         <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] p-6 space-y-6">
@@ -56,7 +46,7 @@ export default function TraitGrid({ initialTraits }: { initialTraits: Trait[] })
             />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {traits.map((trait) => (
+                {filteredTraits.map((trait) => (
                     <Link key={trait.id} href={`/traits/${trait.slug}`}>
                         <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] transition">
                             <div className="flex justify-between items-start">
