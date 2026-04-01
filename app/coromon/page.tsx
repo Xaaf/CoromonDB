@@ -14,6 +14,26 @@ export default function CoromonPage() {
     const [loading, setLoading] = useState(false);
     const [icons, setIcons] = useState<Record<string, string>>({});
 
+    function getIconUrl(c: Coromon) {
+        let iconUrl = `${c.name.toLowerCase()}_normal.png`;
+
+        // Edge Cases
+        if (c.primary_type == "Crimsonite") {
+            iconUrl = `crimsonite_${c.name.toLowerCase()}_normal.png`;
+        }
+
+        if (c.slug == "vorst") {
+            iconUrl = `${c.slug.toLowerCase()}_normal.png`;
+        }
+
+        const { data } = supabase
+            .storage
+            .from("coromon_icons")
+            .getPublicUrl(iconUrl);
+
+        return data.publicUrl;
+    }
+
     useEffect(() => {
         let debounceTimer: NodeJS.Timeout
         let loadingTimer: NodeJS.Timeout
@@ -57,33 +77,6 @@ export default function CoromonPage() {
         }
     }, [search]);
 
-    useEffect(() => {
-        async function fetchIcons() {
-            const urls: Record<string, string> = {};
-
-            for (const c of coromon) {
-                let iconUrl = `${c.name.toLowerCase()}_normal.png`;
-
-                // Edge Cases
-                if (c.primary_type == "Crimsonite") {
-                    iconUrl = `crimsonite_${c.name.toLowerCase()}_normal.png`;
-                }
-
-                if (c.slug == "vorst") {
-                    iconUrl = `${c.slug.toLowerCase()}_normal.png`;
-                }
-
-                const iconData = await supabase.storage.from("coromon_icons").getPublicUrl(iconUrl);
-
-                if (iconData.data.publicUrl) urls[(c.primary_type == "Crimsonite" ? `crimsonite_${c.name}` : c.name)] = iconData.data.publicUrl;
-            }
-
-            setIcons(urls);
-        }
-
-        if (coromon.length > 0) fetchIcons();
-    }, [coromon]);
-
     return (
         <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] p-6 space-y-6">
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6 space-y-6">
@@ -120,16 +113,16 @@ export default function CoromonPage() {
                 {coromon.map((c) => (
                     <Link key={c.id} href={`/coromon/${c.slug}`}>
                         <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md cursor-pointer bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] transition flex items-center gap-4">
-                            {icons[(c.primary_type == "Crimsonite" ? `crimsonite_${c.name}` : c.name)] && (
+                            <div className="w-10 h-10 flex items-center justify-center">
                                 <Image
-                                    src={icons[(c.primary_type == "Crimsonite" ? `crimsonite_${c.name}` : c.name)]}
+                                    src={getIconUrl(c)}
                                     width={40}
                                     height={40}
                                     alt=""
-                                    className="object-contain max-h-full mb-2"
+                                    className="object-contain w-auto h-auto"
                                     unoptimized
                                 />
-                            )}
+                            </div>
 
                             <div className="flex-1">
                                 <h2 className="text-lg font-semibold mb-2">
