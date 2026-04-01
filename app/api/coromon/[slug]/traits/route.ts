@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
     const { data, error } = await supabase
         .from("coromon_traits")
         .select(`
+      odds,
       traits (
         id,
         name,
@@ -43,6 +44,14 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: "Error fetching traits" }, { status: 500 });
     }
 
-    const traits = data.map((item: any) => item.traits);
+    const traits = data
+        .filter((item: any) => item.traits)
+        .map((item: any) => ({
+            ...item.traits,
+            odds: item.odds ?? 0,
+        }));
+
+    console.log("Fetched traits: ", traits);
+
     return NextResponse.json(traits);
 }

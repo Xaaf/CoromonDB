@@ -104,7 +104,9 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                                 </p>
 
                                 <p className="text-sm mb-1">{trait.description}</p>
-                                <p className="font-semibold text-sm text-gray-400">Chance: x%</p>
+                                <p className="font-semibold text-sm text-gray-400">
+                                    Chance: {trait.odds ?? "-"}%
+                                </p>
                             </Link>
                         ))}
                     </div>
