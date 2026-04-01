@@ -1,25 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { getCoromon } from "@/lib/utils/coromonUtils";
 
 export async function GET(request: NextRequest) {
-    const { search} = Object.fromEntries(request.nextUrl.searchParams.entries()) as { search: string };
-    let query = supabase.from("coromon").select("*").order("corodex_number", { ascending: true });
-
-    // Single Coromon fetch by slug
-    // if (slug) {
-    //     query = query.eq('slug', slug).single();
-    // }
-
-    // No slug so we're searching instead
-    if (search) {
-        query = query.ilike("slug", `%${search}%`);
+    const search = request.nextUrl.searchParams.get("search") ?? undefined;
+    
+    try {
+        const coromonData = await getCoromon(search);
+        return NextResponse.json(coromonData);
+    } catch (error) {
+        console.error("Error fetching coromon data: ", error);
+        return NextResponse.json({ error: "Error fetching coromon data" }, { status: 500 });
     }
-
-    const { data, error } = await query;
-    if (error) {
-        console.error("Error fetching data: ", error);
-        return NextResponse.json({ error: "Error fetching data" }, { status: 500 });
-    }
-
-    return NextResponse.json(data);
 }

@@ -1,8 +1,8 @@
 import { typeColors } from "@/lib/types/typeColors";
-import StatBar from "./StatBar";
-import { getMaxStats } from "@/lib/utils";
+import { AllStatBars } from "./StatBar";
 import Link from "next/link";
 import CoromonFrontSprites from "./CoromonImage";
+import { getTraitsForCoromon } from "@/lib/utils/traitUtils";
 
 export default async function CoromonDetail({ coromon }: { coromon: any }) {
     const totalBST = coromon.stat_hp
@@ -12,11 +12,8 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp_attack
         + coromon.stat_sp_defense
         + coromon.stat_sp;
-
-    const maxStats = await getMaxStats();
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/${coromon.slug}/traits`);
-    const traits = await res.json();
+    
+    const traits = await getTraitsForCoromon(coromon.slug);
 
     return (
         <div className="space-y-6">
@@ -28,6 +25,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                         {coromon.corodex_number > 0 ? `#${coromon.corodex_number}` : "#???"} {coromon.name}
                     </h1>
 
+                    {/* --- TAGS --- */}
                     <div className="flex gap-2 mb-4">
                         {coromon.corodex_number < 0 && (
                             <span className="px-3 py-1 rounded-full text-sm font-semibold">
@@ -61,15 +59,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                         Total BST: <span className="font-semibold">{totalBST}</span>
                     </p>
 
-                    <div className="space-y-3">
-                        <StatBar label="HP" value={coromon.stat_hp} maxStats={maxStats} />
-                        <StatBar label="Speed" value={coromon.stat_speed} maxStats={maxStats} />
-                        <StatBar label="Attack" value={coromon.stat_attack} maxStats={maxStats} />
-                        <StatBar label="Defense" value={coromon.stat_defense} maxStats={maxStats} />
-                        <StatBar label="Sp. Attack" value={coromon.stat_sp_attack} maxStats={maxStats} />
-                        <StatBar label="Sp. Defense" value={coromon.stat_sp_defense} maxStats={maxStats} />
-                        <StatBar label="SP" value={coromon.stat_sp} maxStats={maxStats} />
-                    </div>
+                    <AllStatBars coromon={coromon} />
                 </div>
             </div>
 
@@ -104,14 +94,18 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                 {traits && traits.length > 0 ? (
                     <div className="grid md:grid-cols-2 gap-4">
                         {traits.map((trait: any, idx: number) => (
-                            <Link key={idx} href={`/traits/${trait.slug}`} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                                <h3 className="font-semibold mb-1">{trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}</h3>
+                            <Link key={trait.slug} href={`/traits/${trait.slug}`} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                <div className="flex justify-between items-start">
+                                    <h3 className="font-semibold mb-1">{trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}</h3>
+                                    <p className="font-semibold text-sm text-gray-400">
+                                        Chance: {trait.odds ?? "-"}%
+                                    </p>
+                                </div>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                                     {trait.type} {trait.cooldown ? `(Cooldown: ${trait.cooldown} minutes)` : ""}
                                 </p>
 
                                 <p className="text-sm mb-1">{trait.description}</p>
-                                <p className="font-semibold text-sm text-gray-400">Chance: x%</p>
                             </Link>
                         ))}
                     </div>

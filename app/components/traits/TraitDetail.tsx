@@ -1,9 +1,9 @@
 import { typeColors } from "@/lib/types/typeColors";
+import { getCoromonFromTrait } from "@/lib/utils/traitUtils";
 import Link from "next/dist/client/link";
 
 export default async function TraitDetail({ trait }: { trait: any }) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/traits/${trait.slug}/coromon`);
-    const coromonList = await res.json();
+    const coromonList = await getCoromonFromTrait(trait.slug);
 
     return (
         <div className="space-y-6">
@@ -74,7 +74,6 @@ export default async function TraitDetail({ trait }: { trait: any }) {
             {/* --- COROMON WITH THE TRAIT --- */}
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
                 <h2 className="text-2xl font-bold mb-4">Coromon with this Trait</h2>
-                {/* <p>List of Coromon with this trait will go here...</p> */}
 
                 {coromonList && coromonList.length > 0 ? (
                     <div className="grid md:grid-cols-2 gap-4">

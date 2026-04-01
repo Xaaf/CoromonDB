@@ -1,9 +1,10 @@
 import CoromonGrid from "@/app/components/coromon/CoromonGrid";
 
 async function getInitialCoromon() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon`, {
-        next: { revalidate: 60 }, // cache for 60 sec for speed
-    });
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon`, 
+        { next: { revalidate: 60 * 60 * 24 } }
+    );
     const data = await res.json();
 
     const filtered = data.filter((c: any) => c.corodex_number >= -100);

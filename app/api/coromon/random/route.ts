@@ -1,22 +1,22 @@
+import { supabase } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon`, {
-            cache: "no-store", // prevents the Vercel caching issue
-        });
+        const { data, error } = await supabase
+            .from("coromon")
+            .select("*")
+            .order("random()")
+            .limit(1)
+            .single();
 
-        const data = await res.json();
-        if (!data || data.length === 0) {
-            return NextResponse.json(null, { status: 404 });
+        if (error || !data) {
+            return NextResponse.json("Couldn't find a random Coromon.", { status: 404 });
         }
 
-        const random = data[Math.floor(Math.random() * data.length)];
-
-        return NextResponse.json(random);
-    
+        return NextResponse.json(data);
     } catch (error) {
         console.error("Error fetching random coromon:", error);
-        return NextResponse.json(null, { status: 500 });
+        return NextResponse.json("Couldn't find a random Coromon.", { status: 500 });
     }
 }

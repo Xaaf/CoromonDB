@@ -5,7 +5,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     const { slug } = await params;
 
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/traits?search=${encodeURIComponent(slug)}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/traits?search=${encodeURIComponent(slug)}`,
+        { next: { revalidate: 60 * 60 * 24 } }
     );
     const data = await res.json();
 
