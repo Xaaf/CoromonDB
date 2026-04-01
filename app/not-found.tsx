@@ -8,7 +8,8 @@ async function getRandomCoromon() {
         });
         if (!res.ok) return null;
 
-        return await res.json();
+        const data = await res.json();
+        return Array.isArray(data) ? data[0] : data; // unwrap the first item
     } catch (error) {
         console.error("Failed to fetch random Coromon:", error);
         return null;
@@ -17,6 +18,7 @@ async function getRandomCoromon() {
 
 export default async function NotFound() {
     const coromon = await getRandomCoromon();
+    console.log(coromon);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)]">
