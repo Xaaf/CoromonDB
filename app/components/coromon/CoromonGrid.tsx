@@ -2,33 +2,13 @@
 
 import { Coromon } from "@/lib/types/coromon";
 import { typeColors } from "@/lib/types/typeColors";
-import { supabase } from "@/lib/supabase";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import { getIconUrl } from "@/lib/utils/utils";
 
 export default function CoromonGrid({ initialCoromon }: { initialCoromon: Coromon[] }) {
     const [search, setSearch] = useState("");
-
-    function getIconUrl(c: Coromon) {
-        let iconUrl = `${c.name.toLowerCase()}_normal.png`;
-
-        // Edge Cases
-        if (c.primary_type == "Crimsonite") {
-            iconUrl = `crimsonite_${c.name.toLowerCase()}_normal.png`;
-        }
-
-        if (c.slug == "vorst") {
-            iconUrl = `${c.slug.toLowerCase()}_normal.png`;
-        }
-
-        const { data } = supabase
-            .storage
-            .from("coromon_icons")
-            .getPublicUrl(iconUrl);
-
-        return data.publicUrl;
-    }
 
     const filteredCoromon = search
         ? initialCoromon.filter((coromon) =>

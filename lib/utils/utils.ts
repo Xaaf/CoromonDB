@@ -1,7 +1,28 @@
 import { supabase } from "@/lib/supabase";
+import { Coromon } from "../types/coromon";
 
 // Revalidate every day at most
 export const revalidate = 60 * 60 * 24
+
+export function getIconUrl(c: Coromon) {
+    let iconUrl = `${c.name.toLowerCase()}_normal.png`;
+
+    // Edge Cases
+    if (c.primary_type == "Crimsonite") {
+        iconUrl = `crimsonite_${c.name.toLowerCase()}_normal.png`;
+    }
+
+    if (c.slug == "vorst") {
+        iconUrl = `${c.slug.toLowerCase()}_normal.png`;
+    }
+
+    const { data } = supabase
+        .storage
+        .from("coromon_icons")
+        .getPublicUrl(iconUrl);
+
+    return data.publicUrl;
+}
 
 export async function getMaxStats() {
     const { data, error } = await supabase
