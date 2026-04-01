@@ -1,5 +1,8 @@
 import { supabase } from "./supabase";
 
+// Revalidate every day at most
+export const revalidate = 60 * 60 * 24
+
 export async function getMaxStats() {
     const { data, error } = await supabase
         .from("coromon")
