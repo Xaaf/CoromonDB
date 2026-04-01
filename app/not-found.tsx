@@ -2,14 +2,14 @@ import Link from "next/link";
 
 async function getRandomCoromon() {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon`);
-        const data = await res.json();
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/random`, {
+            cache: "no-store", // prevents the Vercel caching issue
+        });
+        if (!res.ok) return null;
 
-        if (!data || data.length == 0) return null;
-
-        return data[Math.floor(Math.random() * data.length)];
+        return await res.json();
     } catch (error) {
-        console.error("Failed to fetch a random Coromon: ", error);
+        console.error("Failed to fetch random Coromon:", error);
         return null;
     }
 }
