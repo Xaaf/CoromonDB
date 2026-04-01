@@ -1,4 +1,4 @@
-import { getMaxStats } from "@/lib/utils";
+import { getMaxStats } from "@/lib/utils/utils";
 
 type Props = {
     label: string,

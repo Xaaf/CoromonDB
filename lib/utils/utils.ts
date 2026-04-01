@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+import { supabase } from "@/lib/supabase";
 
 // Revalidate every day at most
 export const revalidate = 60 * 60 * 24

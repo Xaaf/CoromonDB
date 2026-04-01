@@ -2,6 +2,7 @@ import { typeColors } from "@/lib/types/typeColors";
 import { AllStatBars } from "./StatBar";
 import Link from "next/link";
 import CoromonFrontSprites from "./CoromonImage";
+import { getTraitsForCoromon } from "@/lib/utils/traitUtils";
 
 export default async function CoromonDetail({ coromon }: { coromon: any }) {
     const totalBST = coromon.stat_hp
@@ -11,12 +12,8 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp_attack
         + coromon.stat_sp_defense
         + coromon.stat_sp;
-
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/${coromon.slug}/traits`,
-        { next: { revalidate: 60 * 60 * 24 } }
-    );
-    const traits = await res.json();
+    
+    const traits = await getTraitsForCoromon(coromon.slug);
 
     return (
         <div className="space-y-6">
@@ -97,7 +94,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                 {traits && traits.length > 0 ? (
                     <div className="grid md:grid-cols-2 gap-4">
                         {traits.map((trait: any, idx: number) => (
-                            <Link key={idx} href={`/traits/${trait.slug}`} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                            <Link key={trait.slug} href={`/traits/${trait.slug}`} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
                                 <div className="flex justify-between items-start">
                                     <h3 className="font-semibold mb-1">{trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}</h3>
                                     <p className="font-semibold text-sm text-gray-400">
