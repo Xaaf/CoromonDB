@@ -2,6 +2,7 @@ import { typeColors } from "@/lib/types/typeColors";
 import StatBar from "./StatBar";
 import { getMaxStats } from "@/lib/utils";
 import Link from "next/link";
+import CoromonFrontSprites from "./CoromonImage";
 
 export default async function CoromonDetail({ coromon }: { coromon: any }) {
     const totalBST = coromon.stat_hp
@@ -44,8 +45,8 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                         )}
                     </div>
 
-                    <div className="mt-4 h-48 bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] rounded-md flex items-center justify-center text-gray-400">
-                        Image Here...
+                    <div className="mt-4 h-48 bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] rounded-md flex items-center flex justify-center text-gray-400">
+                        <CoromonFrontSprites coromon={coromon} />
                     </div>
 
                     <p className="mt-4 text-[var(--color-text)] dark:text-[var(--color-text-dark)]">

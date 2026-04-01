@@ -7,7 +7,7 @@ For this, we might need to add new columns to the database's tables. These are m
     - [ ] **DB** Add descriptions
     - [ ] **DB** Add skill property tags
     - [ ] **DB** Add properties
-    - [ ] Add images; consider where to store them for long-term use!
+    - [x] Add images; consider where to store them for long-term use!
 
 ## Traits
 For this, we might need to add new columns to the database's tables. These are marked with **DB**.
