@@ -5,14 +5,12 @@ import { typeColors } from "@/lib/types/typeColors";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CoromonIcon from "../components/coromon/CoromonIcon";
 import Image from "next/image";
 
 export default function CoromonPage() {
     const [search, setSearch] = useState("");
     const [coromon, setCoromon] = useState<Coromon[]>([]);
     const [loading, setLoading] = useState(false);
-    const [icons, setIcons] = useState<Record<string, string>>({});
 
     function getIconUrl(c: Coromon) {
         let iconUrl = `${c.name.toLowerCase()}_normal.png`;
