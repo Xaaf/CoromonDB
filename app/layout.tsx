@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/next";
 import Header from "./components/layout/Header";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
@@ -16,7 +17,9 @@ export default function RootLayout({
           {children}
         </main>
 
+        {/* ---- VERCEL UTILITIES ---- */}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
