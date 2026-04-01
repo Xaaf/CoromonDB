@@ -1,3 +1,5 @@
+import { getMaxStats } from "@/lib/utils";
+
 type Props = {
     label: string,
     value: number,
@@ -33,5 +35,21 @@ export default function StatBar({ label, value, maxStats }: Props) {
                 />
             </div>
         </div>
-    )
+    );
+}
+
+export async function AllStatBars({ coromon }: { coromon: any }) {
+    const maxStats = await getMaxStats();
+    
+    return (
+        <div className="space-y-3">
+            <StatBar label="HP" value={coromon.stat_hp} maxStats={maxStats} />
+            <StatBar label="Speed" value={coromon.stat_speed} maxStats={maxStats} />
+            <StatBar label="Attack" value={coromon.stat_attack} maxStats={maxStats} />
+            <StatBar label="Defense" value={coromon.stat_defense} maxStats={maxStats} />
+            <StatBar label="Sp. Attack" value={coromon.stat_sp_attack} maxStats={maxStats} />
+            <StatBar label="Sp. Defense" value={coromon.stat_sp_defense} maxStats={maxStats} />
+            <StatBar label="SP" value={coromon.stat_sp} maxStats={maxStats} />
+        </div>
+    );
 }

@@ -1,6 +1,5 @@
 import { typeColors } from "@/lib/types/typeColors";
-import StatBar from "./StatBar";
-import { getMaxStats } from "@/lib/utils";
+import { AllStatBars } from "./StatBar";
 import Link from "next/link";
 import CoromonFrontSprites from "./CoromonImage";
 
@@ -12,8 +11,6 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp_attack
         + coromon.stat_sp_defense
         + coromon.stat_sp;
-
-    const maxStats = await getMaxStats();
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/${coromon.slug}/traits`);
     const traits = await res.json();
@@ -61,15 +58,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                         Total BST: <span className="font-semibold">{totalBST}</span>
                     </p>
 
-                    <div className="space-y-3">
-                        <StatBar label="HP" value={coromon.stat_hp} maxStats={maxStats} />
-                        <StatBar label="Speed" value={coromon.stat_speed} maxStats={maxStats} />
-                        <StatBar label="Attack" value={coromon.stat_attack} maxStats={maxStats} />
-                        <StatBar label="Defense" value={coromon.stat_defense} maxStats={maxStats} />
-                        <StatBar label="Sp. Attack" value={coromon.stat_sp_attack} maxStats={maxStats} />
-                        <StatBar label="Sp. Defense" value={coromon.stat_sp_defense} maxStats={maxStats} />
-                        <StatBar label="SP" value={coromon.stat_sp} maxStats={maxStats} />
-                    </div>
+                    <AllStatBars coromon={coromon} />
                 </div>
             </div>
 
