@@ -12,7 +12,10 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp_defense
         + coromon.stat_sp;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/${coromon.slug}/traits`);
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/${coromon.slug}/traits`,
+        { next: { revalidate: 60 * 60 * 24 } }
+    );
     const traits = await res.json();
 
     return (
@@ -25,6 +28,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                         {coromon.corodex_number > 0 ? `#${coromon.corodex_number}` : "#???"} {coromon.name}
                     </h1>
 
+                    {/* --- TAGS --- */}
                     <div className="flex gap-2 mb-4">
                         {coromon.corodex_number < 0 && (
                             <span className="px-3 py-1 rounded-full text-sm font-semibold">

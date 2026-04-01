@@ -2,7 +2,10 @@ import { typeColors } from "@/lib/types/typeColors";
 import Link from "next/dist/client/link";
 
 export default async function TraitDetail({ trait }: { trait: any }) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/traits/${trait.slug}/coromon`);
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/traits/${trait.slug}/coromon`,
+        { next: { revalidate: 60 * 60 * 24 } }
+    );
     const coromonList = await res.json();
 
     return (

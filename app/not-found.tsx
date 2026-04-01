@@ -4,6 +4,7 @@ async function getRandomCoromon() {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/random`, {
             cache: "no-store", // prevents the Vercel caching issue
+            next: { revalidate: 0 }, // ensures we get fresh data on every request
         });
         if (!res.ok) return null;
 
