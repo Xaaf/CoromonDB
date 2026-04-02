@@ -32,7 +32,6 @@ export default async function Home() {
                             date="March 19th, 2026"
                             link="news/patch-coromon-remastered"
                             image="/images/coromon_remastered.png"
-                            author="Xaaf"
                         />
 
                         <NewsCard
@@ -42,7 +41,6 @@ export default async function Home() {
                             date="September 16th, 2025"
                             link="news/rogue-planet-september-update"
                             image="/images/coromon_rogue_planet.png"
-                            author="Xaaf"
                         />                        
                     </main>
 

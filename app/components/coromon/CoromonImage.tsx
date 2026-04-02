@@ -1,6 +1,17 @@
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 
+/**
+ * `CoromonFrontSprites` component
+ * 
+ * Displays the front sprites for a given Coromon, including all three potential forms
+ * in a tabbed element.
+ * 
+ * @param {object} props - The component props
+ * @param {object} props.coromon - The Coromon data object
+ * 
+ * @returns {Promise<JSX.Element>} The rendered Coromon front sprites component
+ */
 export default async function CoromonFrontSprites({ coromon }: { coromon: any }) {
     const normalUrl = `${coromon.name.toLowerCase()}_normal_front.gif`;
     const potentUrl = `${coromon.name.toLowerCase()}_potent_front.gif`;

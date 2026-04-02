@@ -1,3 +1,6 @@
+/**
+ * Represents a Coromon with its various attributes and statistics.
+ */
 export interface Coromon {
     id: number;
     corodex_number: number;

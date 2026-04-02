@@ -1,6 +1,15 @@
 import { supabase } from "@/lib/supabase";
 import { unstable_cache } from "next/cache";
 
+/**
+ * Server-side utility function to fetch a Coromon from the database, with optional
+ * search functionality. The results are cached for 24 hours to optimize performance.
+ * 
+ * @param search (Optional) String to search for in the Coromon's slugs.
+ * 
+ * @returns {Promise<Array>} A promise that resolves to an array of Coromon data.
+ * @throws {Error} Throws an error if there is an issue fetching the Coromon data.
+ */
 export function getCoromon(search?: string) {
     return unstable_cache(
         async () => {

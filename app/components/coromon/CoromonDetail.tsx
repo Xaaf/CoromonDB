@@ -4,6 +4,20 @@ import Link from "next/link";
 import CoromonFrontSprites from "./CoromonImage";
 import { getTraitsForCoromon } from "@/lib/utils/traitUtils";
 
+/**
+ * `CoromonDetail` component
+ * 
+ * Displays detailed information for a single Coromon, including its stats, evolutions,
+ * available skills and available traits.
+ * 
+ * @param {Object} props - The component props
+ * @param {Object} props.coromon - The Coromon data object
+ * 
+ * @returns {Promise<JSX.Element>} The rendered Coromon detail component
+ * @see {@link AllStatBars} for the component that renders the Coromon's stats in a visual way.
+ * @see {@link CoromonFrontSprites} for the component that renders the Coromon's sprites.
+ * @see {@link getTraitsForCoromon} for the function that fetches the traits for this Coromon.
+ */
 export default async function CoromonDetail({ coromon }: { coromon: any }) {
     const totalBST = coromon.stat_hp
         + coromon.stat_speed
@@ -12,7 +26,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp_attack
         + coromon.stat_sp_defense
         + coromon.stat_sp;
-    
+
     const traits = await getTraitsForCoromon(coromon.slug);
 
     return (

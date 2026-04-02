@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+/**
+ * Utility function to fetch a random Coromon from the API. This is used in the 404
+ * page to display a random Coromon when a user lands on a non-existent page for a
+ * bit of fun and to encourage users to explore the database.
+ * 
+ * @returns {Promise<Object|null>} A random Coromon object or null if the fetch fails 
+ * @see {@link GET /api/coromon/random} for the API endpoint that returns a random Coromon.
+ */
 async function getRandomCoromon() {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon/random`, {
@@ -16,6 +24,15 @@ async function getRandomCoromon() {
     }
 }
 
+/**
+ * `NotFound` component
+ * 
+ * This component renders a custom 404 page when a user navigates to a non-existent route. It fetches
+ * a random Coromon to display a fun message and encourage users to explore the database. It also provides
+ * links to the home page and the Coromon browsing page for easy navigation.
+ * 
+ * @returns {JSX.Element} The rendered 404 page
+ */
 export default async function NotFound() {
     const coromon = await getRandomCoromon();
     console.log(coromon);

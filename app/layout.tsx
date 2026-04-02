@@ -3,6 +3,18 @@ import Header from "./components/layout/Header";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+/**
+ * `RootLayout` component
+ * 
+ * This is the root layout component for the application. It wraps all pages and components,
+ * providing a consistent structure and styling across the app. It includes the header, main content area,
+ * and integrates Vercel utilities for analytics and performance insights.
+ * 
+ * @param {Object} props - The component props
+ * @param {React.ReactNode} props.children - The child components to be rendered within the layout
+ * 
+ * @returns {JSX.Element} The rendered root layout component
+ */
 export default function RootLayout({
   children,
 }: {

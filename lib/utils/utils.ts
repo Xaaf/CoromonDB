@@ -4,6 +4,13 @@ import { Coromon } from "../types/coromon";
 // Revalidate every day at most
 export const revalidate = 60 * 60 * 24
 
+/**
+ * Fetch the url for a Coromon's icon from Supabase storage.
+ * @param c Coromon to fetch the icon for.
+ * 
+ * @returns The public URL of the Coromon's icon.
+ * @throws {Error} Throws an error if there is an issue fetching the icon URL.
+ */
 export function getIconUrl(c: Coromon) {
     let iconUrl = `${c.name.toLowerCase()}_normal.png`;
 
@@ -24,6 +31,15 @@ export function getIconUrl(c: Coromon) {
     return data.publicUrl;
 }
 
+/**
+ * Fetch the set of highest base stats for all Coromon in the database. Note that
+ * this computation *does* exclude the Titans as they have absurdly higher stats
+ * in notably the HP and SP categories. This would unfairly skew the results of
+ * the statbars on the Coromon's pages, thus the Titans are excluded from this.
+ * 
+ * @returns {Promise<Object>} An object containing the highest base stats for all Coromon.
+ * @throws {Error} Throws an error if there is an issue fetching the Coromon data.
+ */
 export async function getMaxStats() {
     const { data, error } = await supabase
         .from("coromon")

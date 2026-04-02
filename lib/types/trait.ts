@@ -1,3 +1,6 @@
+/**
+ * Represents a Trait and its associated attributes.
+ */
 export interface Trait {
     id: number;
     name: string;

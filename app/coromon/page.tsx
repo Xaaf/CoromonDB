@@ -1,5 +1,10 @@
 import CoromonGrid from "@/app/components/coromon/CoromonGrid";
 
+/**
+ * Fetches the initial list of Coromon from the API.
+ * 
+ * @returns {Promise<any[]>} The list of Coromon to display on the page 
+ */
 async function getInitialCoromon() {
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon`, 
@@ -23,6 +28,16 @@ async function getInitialCoromon() {
     return sorted;
 }
 
+/**
+ * `CoromonPage` component
+ * 
+ * Displays a list of all Coromon in a grid format, as well as a search bar allowing
+ * for the user to easily find the Coromon they are looking for. Each Coromon is
+ * displayed in a card with their icon, name, Corodex number and types.
+ * 
+ * @returns {Promise<JSX.Element>} The rendered Coromon page
+ * @see {@link CoromonGrid} for the actual grid component that is rendered on this page.
+ */
 export default async function CoromonPage() {
     const initialCoromon = await getInitialCoromon();
 

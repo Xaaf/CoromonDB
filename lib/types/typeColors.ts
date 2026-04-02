@@ -1,3 +1,6 @@
+/**
+ * List of colours associated with the type tags throughout throughout the app.
+ */
 export const typeColors: Record<string, string> = {
     Normal: "bg-mist-300 text-slate-950",
     Electric: "bg-yellow-200 text-slate-950",

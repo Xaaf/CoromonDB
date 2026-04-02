@@ -4,6 +4,18 @@ import { Trait } from "@/lib/types/trait";
 import Link from "next/dist/client/link";
 import { useState } from "react";
 
+/**
+ * `TraitGrid` component
+ * 
+ * Displays a list of all Traits in a grid format, as well as a search bar allowing
+ * for the user to easily find the Traits they are looking for. Each Trait is
+ * displayed in a card with their name and description.
+ * 
+ * @param {Object} props - The component props
+ * @param {Trait[]} props.initialTraits - The initial list of Traits to display
+ *  
+ * @returns {Promise<JSX.Element>} The rendered Trait grid component
+ */
 export default function TraitGrid({ initialTraits }: { initialTraits: Trait[] }) {
     const [search, setSearch] = useState("");
 

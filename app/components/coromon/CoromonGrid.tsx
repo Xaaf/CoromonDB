@@ -3,10 +3,22 @@
 import { Coromon } from "@/lib/types/coromon";
 import { typeColors } from "@/lib/types/typeColors";
 import Link from "next/link";
-import { useState } from "react";
+import { JSX, useState } from "react";
 import Image from "next/image";
 import { getIconUrl } from "@/lib/utils/utils";
 
+/**
+ * `CoromonGrid` component
+ * 
+ * Displays a list of all Coromon in a grid format, as well as a search bar allowing
+ * for the user to easily find the Coromon they are looking for. Each Coromon is
+ * displayed in a card with their icon, name, Corodex number and types.
+ * 
+ * @param {Object} props - The component props
+ * @param {Coromon[]} props.initialCoromon - The initial list of Coromon to display
+ *  
+ * @returns {Promise<JSX.Element>} The rendered Coromon grid component
+ */
 export default function CoromonGrid({ initialCoromon }: { initialCoromon: Coromon[] }) {
     const [search, setSearch] = useState("");
 

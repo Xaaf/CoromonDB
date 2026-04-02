@@ -2,6 +2,19 @@ import { typeColors } from "@/lib/types/typeColors";
 import { getCoromonFromTrait } from "@/lib/utils/traitUtils";
 import Link from "next/dist/client/link";
 
+/**
+ * `TraitDetail` component
+ * 
+ * Displays detailed information for a single Trait, including its effects and the
+ * Coromon that can have this trait. It also shows the odds the Coromon has of
+ * obtaining the trait.
+ * 
+ * 
+ * @param {Object} props - The component props
+ * @param {Object} props.trait - The Trait data object
+ * 
+ * @returns {Promise<JSX.Element>} The rendered Trait detail component
+ */
 export default async function TraitDetail({ trait }: { trait: any }) {
     const coromonList = await getCoromonFromTrait(trait.slug);
 

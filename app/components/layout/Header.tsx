@@ -1,5 +1,12 @@
 import Link from "next/link";
 
+/**
+ * `Header` component
+ * 
+ * Renders the site header with navigation links.
+ * 
+ * @returns {Promise<JSX.Element>} The rendered Header component
+ */
 export default function Header() {
 
     return (

@@ -1,6 +1,24 @@
 import Container from "@/app/components/layout/Container";
 import CoromonDetail from "@/app/components/coromon/CoromonDetail";
 
+/**
+ * /coromon/[slug] page
+ * 
+ * Displays a detailed page for a single Coromon, through use of the `CoromonDetail`
+ * component.
+ * 
+ * @param {Object} props - The page props
+ * @param {Promise<{ slug: string }>} props.params - The URL parameters, containing the Coromon slug
+ *  
+ * @returns {Promise<JSX.Element>} The rendered Coromon detail page
+ * @see {@link CoromonDetail} for the actual component that renders the Coromon details on this page.
+ * @see {@link Container} for the layout component that is used to wrap the content on this page.
+ * 
+ * @remarks
+ * This page uses Next.js's dynamic routing to display a page for each Coromon based on 
+ * their slug. It fetches the Coromon data from the API and passes it to the `CoromonDetail`
+ * component for rendering. If the Coromon is not found, it displays an error message.
+ */
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
 
