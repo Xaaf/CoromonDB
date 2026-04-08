@@ -62,7 +62,9 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                     </div>
 
                     <p className="mt-4 text-[var(--color-text)] dark:text-[var(--color-text-dark)]">
-                        Coromon's biology goes here...
+                        {coromon.bio && (
+                            <span>{coromon.bio}</span>
+                        )}
                     </p>
                 </div>
 
