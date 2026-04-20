@@ -13,6 +13,7 @@ import { unstable_cache } from "next/cache";
 export function getCoromon(search?: string) {
     return unstable_cache(
         async () => {
+            // TODO: Move the searching to the Supabase side of things -- better performance?
             let query = supabase
                 .from("coromon")
                 .select("*")
@@ -23,7 +24,6 @@ export function getCoromon(search?: string) {
             }
 
             const { data, error } = await query;
-
             if (error || !data) {
                 throw new Error("Error fetching coromon");
             }

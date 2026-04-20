@@ -15,7 +15,6 @@ export async function GET() {
     try {
         const { data, error } = await supabase
             .rpc("get_random");
-        console.log("RPC result:", { data, error });
 
         if (error) {
             return NextResponse.json("Couldn't find a random Coromon.", { status: 404 });
