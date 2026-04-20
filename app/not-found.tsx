@@ -35,7 +35,6 @@ async function getRandomCoromon() {
  */
 export default async function NotFound() {
     const coromon = await getRandomCoromon();
-    console.log(coromon);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)]">

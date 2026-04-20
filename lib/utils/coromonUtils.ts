@@ -34,3 +34,24 @@ export function getCoromon(search?: string) {
         { revalidate: 60 * 60 * 24 }
     )();
 }
+
+export function getCoromonById(id: number) {
+    return unstable_cache(
+        async () => {
+            const { data, error } = await supabase
+                .from("coromon")
+                .select("*")
+                .eq("id", id)
+                .single();
+            
+            if (error || !data) {
+                throw new Error("Error fetching coromon");
+            }
+
+            return data;
+        },
+        ["coromon", id.toString()],
+        { revalidate: 60 * 60 * 24 }
+    )();
+
+}
