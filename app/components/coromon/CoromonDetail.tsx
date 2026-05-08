@@ -3,7 +3,7 @@ import { AllStatBars } from "./StatBar";
 import Link from "next/link";
 import CoromonFrontSprites from "./CoromonImage";
 import { getTraitsForCoromon } from "@/lib/utils/traitUtils";
-import { getCoromonById } from "@/lib/utils/coromonUtils";
+import { getCoromonById, getCoromonEvolutions } from "@/lib/utils/coromonUtils";
 
 // TODO: Switch from JSON to `Coromon` object
 
@@ -32,8 +32,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
 
     const traits = await getTraitsForCoromon(coromon.slug);
 
-    const nextEvolution = (coromon.evolution ? await getCoromonById(coromon.evolution) : null);
-    console.log(coromon);
+    const evolutions = await getCoromonEvolutions(coromon.id);
 
     return (
         <div className="space-y-6">
@@ -88,11 +87,15 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
             {/* --- EVOLUTION SECTION --- */}
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
                 <h2 className="text-2xl font-bold mb-4">Evolution</h2>
-                {coromon.evolution && (
+                {evolutions.map((evolution) => (
+                    <p>{evolution.name}</p>
+                ))}
+
+                {/* {coromon.evolution && (
                     <div className="flex items-center gap-4">
                         Evolves to {nextEvolution.name ? nextEvolution.name : "Unknown"} at level: {coromon.evolution_level ? coromon.evolution_level : "Unknown"}
                     </div>
-                )}
+                )} */}
             </div>
 
             {/* --- SKILLSET SECTION --- */}
