@@ -36,6 +36,11 @@ export function getCoromon(search?: string) {
 }
 
 export function getCoromonById(id: number) {
+    if (!id) {
+        console.error(`Called getCoromonById with an invalid id ${id}`);
+        return null;
+    }
+
     return unstable_cache(
         async () => {
             const { data, error } = await supabase

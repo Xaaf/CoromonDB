@@ -31,7 +31,8 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp;
 
     const traits = await getTraitsForCoromon(coromon.slug);
-    const nextEvolution = await getCoromonById(coromon.evolution);
+
+    const nextEvolution = (coromon.evolution ? await getCoromonById(coromon.evolution) : null);
     console.log(coromon);
 
     return (
