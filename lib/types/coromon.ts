@@ -16,4 +16,7 @@ export interface Coromon {
     stat_sp_attack: number;
     stat_sp_defense: number;
     stat_sp: number;
+    bio: string;
+    evolution: number | null;
+    evolution_level: number | null;
 }

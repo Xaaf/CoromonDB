@@ -14,7 +14,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try {
         const { data, error } = await supabase
-            .rpc("get_random_coromon");
+            .rpc("get_random");
 
         if (error) {
             return NextResponse.json("Couldn't find a random Coromon.", { status: 404 });
