@@ -37,8 +37,8 @@ export function getCoromon(search?: string) {
 }
 
 export function getCoromonById(id: number) {
-    if (!id) {
-        console.error(`Called getCoromonById with an invalid id ${id}`);
+    if (id == null || isNaN(id)) {
+        console.error(`Called getCoromonById with an invalid id`);
         return null;
     }
 
@@ -50,11 +50,16 @@ export function getCoromonById(id: number) {
                 .eq("id", id)
                 .single();
 
-            if (error || !data) {
-                throw new Error(`Error fetching coromon`);
+            if (error) {
+                // Treat "no rows found" incase we 
+                if (error.code === "PGRST116") {
+                    return null;
+                }
+
+                throw new Error(`Error fetching coromon: ${error.message}`);
             }
 
-            return data;
+            return data ?? null;
         },
         ["coromon", id.toString()],
         { revalidate: 60 * 60 * 24 }
