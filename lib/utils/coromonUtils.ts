@@ -36,6 +36,14 @@ export function getCoromon(search?: string) {
     )();
 }
 
+/**
+ * Server-side utility function to fetch a Coromon with a specific ID.
+ * 
+ * @param id ID to look for in the database.
+ * 
+ * @returns {Promise<Array>} A promise that resolves to an array of Coromon data.
+ * @throws {Error} Throws an error if there is na issue fetching the Coromon data.
+ */
 export function getCoromonById(id: number) {
     if (id == null || isNaN(id)) {
         console.error(`Called getCoromonById with an invalid id`);
@@ -66,10 +74,17 @@ export function getCoromonById(id: number) {
     )();
 }
 
+/**
+ * Server-side utility function to fetch a list of all evolutions in the Coromon's
+ * evolution line, based on its ID. It recursively checks for both pre-evolutions
+ * as well as post-evolutions.
+ * 
+ * @param id ID to fetch the evolution line for.
+ * 
+ * @returns {Promise<Array>} A promise that resolves to an array of mutliple Coromon
+ * data objects.
+ */
 export function getCoromonEvolutions(id: number) {
-    // 1. Check if coromon with this id evolves into anything (evolution col)
-    // 2. Check if this coromon's id IS an evolution (filter db for evolution col = id (rpc?)
-    // 3. Return result in a list
     return unstable_cache(
         async () => {
             const thisCoromon: any = await getCoromonById(id);
