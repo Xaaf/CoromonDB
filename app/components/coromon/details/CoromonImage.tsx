@@ -7,6 +7,8 @@ import Image from "next/image";
  * Displays the front sprites for a given Coromon, including all three potential forms
  * in a tabbed element.
  * 
+ * TODO: Actually have this be a tabbed element.
+ * 
  * @param {object} props - The component props
  * @param {object} props.coromon - The Coromon data object
  * 

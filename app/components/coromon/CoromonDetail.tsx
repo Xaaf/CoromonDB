@@ -1,18 +1,18 @@
+import CoromonFrontSprites from "@/app/components/coromon/details/CoromonImage";
+import EvolutionChart from "@/app/components/coromon/details/EvolutionChart";
+import { FlashedSkills, LevelUpSkills } from "@/app/components/coromon/details/SkillsList";
+import { AllStatBars } from "@/app/components/coromon/details/StatBar";
+import TraitGrid from "@/app/components/coromon/details/TraitGrid";
 import { typeColors } from "@/lib/types/typeColors";
-import { AllStatBars } from "./StatBar";
-import Link from "next/link";
-import CoromonFrontSprites from "./CoromonImage";
 import { getTraitsForCoromon } from "@/lib/utils/traitUtils";
-import { getCoromonById, getCoromonEvolutions } from "@/lib/utils/coromonUtils";
-import React from "react";
-
-// TODO: Switch from JSON to `Coromon` object
 
 /**
  * `CoromonDetail` component
  * 
  * Displays detailed information for a single Coromon, including its stats, evolutions,
  * available skills and available traits.
+ * 
+ * TODO: Switch from JSON to `Coromon` object
  * 
  * @param {Object} props - The component props
  * @param {Object} props.coromon - The Coromon data object
@@ -30,10 +30,6 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
         + coromon.stat_sp_attack
         + coromon.stat_sp_defense
         + coromon.stat_sp;
-
-    const traits = await getTraitsForCoromon(coromon.slug);
-
-    const evolutions = await getCoromonEvolutions(coromon.id);
 
     return (
         <div className="space-y-6">
@@ -87,74 +83,22 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
 
             {/* --- EVOLUTION SECTION --- */}
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
-                <h2 className="text-2xl font-bold mb-4">Evolution</h2>
-                {(evolutions.length === 0 || evolutions.length === 1) && (
-                    <p className="text-gray-500 dark:text-gray-400">No evolution data available.</p>
-                )}
-                {evolutions.length > 1 && (
-                    <div className="flex items-center justify-center flex-wrap gap-2">
-                        {evolutions.map((evolution, index) => (
-                            <React.Fragment key={evolution.name}>
-                                <Link href={`/coromon/${evolution.name.toLowerCase()}`} className="text-center px-4 py-2 bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] rounded-md">
-                                    {evolution.name}
-                                </Link>
-                                {index < evolutions.length - 1 && (
-                                    <div className="flex flex-col items-center mx-2">
-                                        <div className="text-lg">→</div>
-                                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                                            Lv. {evolution.evolution_level}
-                                        </div>
-                                    </div>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </div>
-                )}
+                <EvolutionChart coromon={coromon} />
             </div>
 
             {/* --- SKILLSET SECTION --- */}
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
                 <h2 className="text-2xl font-bold mb-4">Skillset</h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                    {/* Level Up */}
-                    <div>
-                        <h3 className="font-semibold mb-2">Level Up</h3>
-                        <p>Level Up table goes here...</p>
-                    </div>
+                    <LevelUpSkills coromon={coromon} />
 
-                    {/* Skill Flash */}
-                    <div>
-                        <h3 className="font-semibold mb-2">Skill Flash</h3>
-                        <p>Skill Flash table goes here...</p>
-                    </div>
+                    <FlashedSkills coromon={coromon} />
                 </div>
             </div>
 
             {/* --- TRAITS SECTION --- */}
             <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
-                <h2 className="text-2xl font-bold mb-4">Traits</h2>
-
-                {traits && traits.length > 0 ? (
-                    <div className="grid md:grid-cols-2 gap-4">
-                        {traits.map((trait: any, idx: number) => (
-                            <Link key={trait.slug} href={`/traits/${trait.slug}`} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                                <div className="flex justify-between items-start">
-                                    <h3 className="font-semibold mb-1">{trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}</h3>
-                                    <p className="font-semibold text-sm text-gray-400">
-                                        Chance: {trait.odds ?? "-"}%
-                                    </p>
-                                </div>
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                                    {trait.type} {trait.cooldown ? `(Cooldown: ${trait.cooldown} minutes)` : ""}
-                                </p>
-
-                                <p className="text-sm mb-1">{trait.description}</p>
-                            </Link>
-                        ))}
-                    </div>
-                ) : (
-                    <p className="text-gray-500 dark:text-gray-400">No traits for this Coromon.</p>
-                )}
+                <TraitGrid coromon="cubzero" />
             </div>
         </div>
     );
