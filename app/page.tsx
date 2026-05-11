@@ -1,5 +1,5 @@
-import Container from "./components/layout/Container";
-import NewsCard from "./components/news/NewsCard";
+import Container from "@/app/components/layout/Container";
+import NewsCard from "@/app/components/news/NewsCard";
 
 export default async function Home() {
     return (

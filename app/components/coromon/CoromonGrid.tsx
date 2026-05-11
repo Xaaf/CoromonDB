@@ -2,10 +2,10 @@
 
 import { Coromon } from "@/lib/types/coromon";
 import { typeColors } from "@/lib/types/typeColors";
-import Link from "next/link";
-import { JSX, useState } from "react";
-import Image from "next/image";
 import { getIconUrl } from "@/lib/utils/utils";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 /**
  * `CoromonGrid` component

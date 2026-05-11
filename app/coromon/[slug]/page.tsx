@@ -1,5 +1,5 @@
-import Container from "@/app/components/layout/Container";
 import CoromonDetail from "@/app/components/coromon/CoromonDetail";
+import Container from "@/app/components/layout/Container";
 
 /**
  * /coromon/[slug] page

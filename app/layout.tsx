@@ -1,6 +1,6 @@
+import Header from "@/app/components/layout/Header";
+import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/next";
-import Header from "./components/layout/Header";
-import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 /**
