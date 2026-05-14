@@ -1,3 +1,6 @@
+import Container from "@/app/components/layout/Container";
+import DataNotice from "@/app/components/layout/DataNotice";
+import Footer from "@/app/components/layout/Footer";
 import Header from "@/app/components/layout/Header";
 import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -22,12 +25,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)]">
+      <body className="min-h-screen flex flex-col">
         <Header />
 
-        <main className="max-w-5xl mx-auto p-6">
-          {children}
-        </main>
+        <DataNotice />
+
+        <div className="flex-1">
+          <Container className="shadow-md/30">
+            {children}
+          </Container>
+        </div>
+
+        <Footer />
 
         {/* ---- VERCEL UTILITIES ---- */}
         <Analytics />

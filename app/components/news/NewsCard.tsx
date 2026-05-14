@@ -32,7 +32,7 @@ const IMAGE_HEIGHT: number = 400;
  */
 export default function NewsCard({ title, excerpt, date, link, author, image }: NewsCardProps) {
     return (
-        <Link href={link} className="block bg-surface dark:bg-surface-dark rounded-xl shadow p-6 hover:shadow-lg transition">
+        <Link href={link} className="block bg-bg-container rounded-xl shadow-md/15 p-6 hover:shadow-lg transition">
             {image && (
                 <div className="mb-4">
                     <Image 
@@ -40,23 +40,26 @@ export default function NewsCard({ title, excerpt, date, link, author, image }: 
                         alt={title}
                         width={IMAGE_WIDTH}
                         height={IMAGE_HEIGHT}
-                        className="w-full h-48 object-cover rounded-lg"
+                        className="w-full h-48 object-cover rounded-t-lg"
                     />
                 </div>
             )}
             
-            <h2 className="text-xl font-bold mb-2 text-[var(--color-text)] dark:text-[var(--color-text-dark)]">
+            <h2 className="text-center text-2xl font-bold mb-2">
                 {title}
             </h2>
 
-            <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-2">
+            <div className="text-center text-sm text-sub-text mb-2">
                 <span>
-                    {date}
-                    {author && ", written by " + author}
+                    posted on {date}{author && ", written by " + author}
                 </span>
             </div>
 
-            <p className="text-[var(--color-text)] dark:text-[var(--color-text-dark)]">{excerpt}</p>
+            <p>{excerpt}</p>
+
+            <p className="text-center text-sm mt-3 text-sub-text">
+                Read more...
+            </p>
         </Link>
     );
 }
