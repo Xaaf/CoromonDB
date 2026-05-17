@@ -31,7 +31,7 @@ export default function RootLayout({
         <DataNotice />
 
         <div className="flex-1">
-          <Container className="shadow-md/30">
+          <Container className="shadow-md/30 rounded-lg">
             {children}
           </Container>
         </div>
