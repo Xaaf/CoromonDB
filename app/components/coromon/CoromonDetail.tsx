@@ -34,7 +34,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
     return (
         <div className="space-y-6">
             {/* --- HEADER CARD --- */}
-            <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6 grid md:grid-cols-2 gap-8">
+            <div className="bg-bg-container rounded-md shadow-md/30 p-6 grid md:grid-cols-2 gap-8">
                 {/* LEFT COLUMN */}
                 <div>
                     <h1 className="text-3xl font-bold mb-2">
@@ -59,11 +59,11 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                         )}
                     </div>
 
-                    <div className="mt-4 h-48 bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] rounded-md flex items-center flex justify-center text-gray-400">
+                    <div className="mt-4 h-48 rounded-md flex items-center justify-center text-gray-400">
                         <CoromonFrontSprites coromon={coromon} />
                     </div>
 
-                    <p className="mt-4 text-[var(--color-text)] dark:text-[var(--color-text-dark)]">
+                    <p className="mt-4">
                         {coromon.bio && (
                             <span>{coromon.bio}</span>
                         )}
@@ -73,7 +73,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                 {/* RIGHT COLUMN - Stats */}
                 <div>
                     <h2 className="text-xl font-semibold mb-2">Stats</h2>
-                    <p className="text-sm text-[var(--color-text)] dark:text-[var(--color-text-dark)] mb-4">
+                    <p className="text-sm mb-4">
                         Total BST: <span className="font-semibold">{totalBST}</span>
                     </p>
 
@@ -82,12 +82,12 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
             </div>
 
             {/* --- EVOLUTION SECTION --- */}
-            <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
+            <div className="rounded-md shadow p-6">
                 <EvolutionChart coromon={coromon} />
             </div>
 
             {/* --- SKILLSET SECTION --- */}
-            <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
+            <div className="bg-bg-container rounded-md shadow-md/30 p-6">
                 <h2 className="text-2xl font-bold mb-4">Skillset</h2>
                 <div className="grid md:grid-cols-2 gap-6">
                     <LevelUpSkills coromon={coromon} />
@@ -97,7 +97,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
             </div>
 
             {/* --- TRAITS SECTION --- */}
-            <div className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-dark)] rounded-md shadow p-6">
+            <div className="rounded-md shadow p-6">
                 <TraitGrid coromon="cubzero" />
             </div>
         </div>

@@ -15,6 +15,13 @@
   --color-bg-footer: #151920;
   --color-bg-button: #2a3854;
 
+  /* Statbar colors */
+  --color-bg-stat-bad: #a95757;
+  --color-bg-stat-mid: #b77c49;
+  --color-bg-stat-ok: #b3b33d;
+  --color-bg-stat-good: #4ea65e;
+  --color-bg-stat: var(--color-bg);
+
   /* Text colors */
   --color-text: #ffffff;
   --color-sub-text: #aeaeae;

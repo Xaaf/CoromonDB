@@ -4,7 +4,7 @@ import { Trait } from "@/lib/types/trait";
 import Link from "next/dist/client/link";
 import { useState } from "react";
 import Image from "next/image";
-import TraitCard from "./cards/TraitCard";
+import { TraitCard } from "./cards/TraitCard";
 
 /**
  * `TraitGrid` component
