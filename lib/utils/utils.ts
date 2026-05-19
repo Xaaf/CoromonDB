@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import { Coromon } from "../types/coromon";
+import { Coromon } from "@/lib/types/coromon";
 
 // Revalidate every day at most
 export const revalidate = 60 * 60 * 24

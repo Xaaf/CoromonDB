@@ -1,5 +1,5 @@
+import TraitGrid from "@/app/components/traits/TraitGrid";
 import { getTraits } from "@/lib/utils/traitUtils";
-import TraitGrid from "../components/traits/TraitGrid";
 
 export default async function TraitsPage() {
     const initialTraits = await getTraits();

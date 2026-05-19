@@ -28,22 +28,26 @@ export default function StatBar({ label, value, maxStats }: StatBarProps) {
     const ok_stat_cutoff = MAX_STAT / 100 * 50;
     const good_stat_cutoff = MAX_STAT / 100 * 75;
 
-    let color = "bg-gray-900";
-    if (value >= bad_stat_cutoff) color = "bg-red-400";
-    if (value >= mid_stat_cutoff) color = "bg-orange-400";
-    if (value >= ok_stat_cutoff) color = "bg-yellow-300";
-    if (value >= good_stat_cutoff) color = "bg-green-400";
+    let color = "bg-bg-stat";
+    if (value >= bad_stat_cutoff) color = "bg-bg-stat-bad";
+    if (value >= mid_stat_cutoff) color = "bg-bg-stat-mid";
+    if (value >= ok_stat_cutoff) color = "bg-bg-stat-ok";
+    if (value >= good_stat_cutoff) color = "bg-bg-stat-good";
 
     return (
         <div>
             <div className="flex justify-between text-sm">
-                <span className="text-[var(--color-text)] dark:text-[var(--color-text-dark)]">{label}</span>
-                <span className="text-[var(--color-text)] dark:text-[var(--color-text-dark)]">{value}</span>
+                <span className="">{label}</span>
+                <span className="">{value}</span>
             </div>
 
-            <div className="w-full bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] rounded h-3">
+            <div className="relative w-full h-2">
                 <div
-                    className={`${color} h-3 rounded`}
+                    className="absolute insert-0 bg-bg-stat h-2 rounded w-full"
+                />
+
+                <div
+                    className={`${color} absolute insert-y h-2 rounded`}
                     style={{ width }}
                 />
             </div>

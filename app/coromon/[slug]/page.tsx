@@ -1,5 +1,6 @@
-import Container from "@/app/components/layout/Container";
 import CoromonDetail from "@/app/components/coromon/CoromonDetail";
+import Container from "@/app/components/layout/Container";
+import { notFound } from "next/navigation";
 
 /**
  * /coromon/[slug] page
@@ -31,18 +32,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     const coromon = data.find((c: any) => c.slug === slug);
 
     if (!coromon) {
-        return (
-            <div className="min-h-screen flex items-center justify-center text-xl text-center text-[var(--color-text)] dark:text-[var(--color-text-dark)] bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)]">
-                Coromon not found. Please check the URL! If you believe this is a mistake, please contact the site admin.
-            </div>
-        );
+        notFound();
     }
 
     return (
-        <div className="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)]">
-            <Container>
-                <CoromonDetail coromon={coromon} />
-            </Container>
+        <div className="min-h-screen text-text">
+            <CoromonDetail coromon={coromon} />
         </div>
     );
 }

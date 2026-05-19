@@ -1,3 +1,10 @@
+import { ReactNode } from "react";
+
+type ContainerProps = {
+    children: ReactNode;
+    className?: string;
+}
+
 /**
  * `Container` component
  * 
@@ -9,9 +16,12 @@
  * 
  * @returns {JSX.Element} The rendered Container component
  */
-export default function Container({ children }: { children: React.ReactNode}) {
+export default function Container({
+    children,
+    className = "",
+}: ContainerProps) {
     return (
-        <main className="max-w-5xl mx-auto p-6">
+        <main className={`max-w-5xl mx-auto p-6 mt-8 bg-(--color-bg-main-container) ${className}`}>
             {children}
         </main>
     );

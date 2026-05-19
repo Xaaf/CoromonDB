@@ -1,6 +1,5 @@
 import { supabase } from "@/lib/supabase";
 import { unstable_cache } from "next/cache";
-import { Coromon } from "@/lib/types/coromon";
 
 /**
  * Server-side utility function to fetch a Coromon from the database, with optional

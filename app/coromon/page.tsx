@@ -41,5 +41,9 @@ async function getInitialCoromon() {
 export default async function CoromonPage() {
     const initialCoromon = await getInitialCoromon();
 
-    return <CoromonGrid initialCoromon={initialCoromon} />;
+    return (
+        <div>
+            <CoromonGrid initialCoromon={initialCoromon} />
+        </div>
+    );
 }

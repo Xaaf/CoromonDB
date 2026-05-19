@@ -1,29 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Fustat:wght@200..800&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
 @import "tailwindcss";
 
 /* -------------------------------
    THEME COLORS
 ---------------------------------*/
 @theme {
-  /* Primary backgrounds */
-  --color-bg: #f3f4f6;          /* light bg */
-  --color-bg-dark: #111827;     /* dark bg */
+  /* Background colors */
+  --color-bg: #1b2230;
+  --color-bg-main-container: #22293a;
+  --color-bg-container: #253045;
+  --color-bg-header: #22293a;
+  --color-bg-footer: #151920;
+  --color-bg-button: #2a3854;
 
-  --color-surface: #ffffff;     /* cards, surfaces */
-  --color-surface-dark: #1f2937;
+  /* Statbar colors */
+  --color-bg-stat-bad: #a95757;
+  --color-bg-stat-mid: #b77c49;
+  --color-bg-stat-ok: #b3b33d;
+  --color-bg-stat-good: #4ea65e;
+  --color-bg-stat: var(--color-bg);
 
-  --color-header: #e5e7eb;      /* light header */
-  --color-header-dark: #1c2535; /* dark header */
-
-  --color-text: #111827;        /* text */
-  --color-text-dark: #f9fafb;
-
-  /* Optional accent colors (type colors, buttons, etc) */
-  --color-accent: #0080ff;
-  --color-accent-dark: #0051ff;
+  /* Text colors */
+  --color-text: #ffffff;
+  --color-sub-text: #aeaeae;
 
   /* Fonts */
-  --font-sans: 'Arial', Helvetica, sans-serif;
-  --font-mono: 'Courier New', monospace;
+  --font-sans: 'Fustat', Helvetica, sans-serif;
+  --font-mono: 'Fira Code', 'Courier New', monospace;
 }
 
 /* -------------------------------
@@ -33,18 +38,7 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
+  font-size: 1.2em;
   margin: 0;
   padding: 0;
-}
-
-/* -------------------------------
-   DARK MODE
----------------------------------*/
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: var(--color-bg-dark);
-    --color-surface: var(--color-surface-dark);
-    --color-text: var(--color-text-dark);
-    --color-accent: var(--color-accent-dark);
-  }
 }

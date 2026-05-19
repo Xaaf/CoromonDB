@@ -37,13 +37,9 @@ export default async function NotFound() {
     const coromon = await getRandomCoromon();
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)]">
+        <div className="pt-5 pb-5 flex items-center justify-center">
             <div className="text-center px-6">
-
-                {/* Big 404 */}
                 <h1 className="text-6xl font-bold mb-4">404</h1>
-
-                {/* Message */}
                 <h2 className="text-2xl font-semibold mb-2">
                     Page not found!
                 </h2>
