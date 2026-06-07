@@ -11,10 +11,7 @@
 
 <hr />
 
-Currently, there are two branches -- `stable` and `dev`. As the names imply, `stable` is supposed to hold only a stable version of the web-app, which is viewable on the  [live website](https://coromondb.xaaf.dev/). The `dev` branch contains the latest additions, and is prone to bugs and other issues. Those interested can view this live as well, on the [preview website](https://preview.coromondb.xaaf.dev/) Only use this branch if you know what you're doing!
-
-> [!WARNING]
-> The preview website pulls from the `dev` branch. Every so often I tend to create a clean branch from `stable`, leading to the preview page being down for a minute. When this happens, it leads to a Vercel login screen. Feel free to contact me on Discord (`xaaf`) when this happens!
+Currently, there are two branches -- `stable` and `dev`. As the names imply, `stable` is supposed to hold only a stable version of the web-app, which is viewable on the  [live website](https://coromondb.xaaf.dev/). The `dev` branch contains the latest additions, and is prone to bugs and other issues. Only use this branch if you know what you're doing!
 
 <hr />
 
