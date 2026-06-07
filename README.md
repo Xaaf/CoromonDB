@@ -1,7 +1,7 @@
 <div align="center">
 
 # CoromonDB
-![GitHub License](https://img.shields.io/github/license/:Xaaf/:CoromonDB)
+![GitHub License](https://img.shields.io/github/license/Xaaf/CoromonDB)
 ![Vercel Deploy Stable](https://deploy-badge.vercel.app/vercel/coromon-db?name=stable)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
