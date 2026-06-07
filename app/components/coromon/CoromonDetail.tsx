@@ -4,7 +4,6 @@ import { FlashedSkills, LevelUpSkills } from "@/app/components/coromon/details/S
 import { AllStatBars } from "@/app/components/coromon/details/StatBar";
 import TraitGrid from "@/app/components/coromon/details/TraitGrid";
 import { typeColors } from "@/lib/types/typeColors";
-import { getTraitsForCoromon } from "@/lib/utils/traitUtils";
 
 /**
  * `CoromonDetail` component
