@@ -23,13 +23,11 @@ export default function StatBar({ label, value, maxStats }: StatBarProps) {
     const MAX_STAT = maxStats[label] || 100;
     const width = `${Math.max(0, Math.min(100, value / MAX_STAT * 100))}%`;
 
-    const bad_stat_cutoff = 0;
     const mid_stat_cutoff = MAX_STAT / 100 * 25;
     const ok_stat_cutoff = MAX_STAT / 100 * 50;
     const good_stat_cutoff = MAX_STAT / 100 * 75;
 
-    let color = "bg-bg-stat";
-    if (value >= bad_stat_cutoff) color = "bg-bg-stat-bad";
+    let color = "bg-bg-stat-bad";
     if (value >= mid_stat_cutoff) color = "bg-bg-stat-mid";
     if (value >= ok_stat_cutoff) color = "bg-bg-stat-ok";
     if (value >= good_stat_cutoff) color = "bg-bg-stat-good";
