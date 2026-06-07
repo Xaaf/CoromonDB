@@ -98,7 +98,7 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
 
             {/* --- TRAITS SECTION --- */}
             <div className="rounded-md shadow p-6">
-                <TraitGrid coromon="cubzero" />
+                <TraitGrid coromon={coromon.slug} />
             </div>
         </div>
     );
