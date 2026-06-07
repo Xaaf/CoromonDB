@@ -1,4 +1,4 @@
-<center>
+<div align="center">
 
 # CoromonDB
 ![GitHub License](https://img.shields.io/github/license/:Xaaf/:CoromonDB)
@@ -7,7 +7,7 @@
 
 > A web-app made with the goal of providing useful information about **Coromon** in a clean way!
 
-</center>
+</div>
 
 <hr />
 
