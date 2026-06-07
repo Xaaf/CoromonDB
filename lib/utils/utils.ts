@@ -1,8 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { Coromon } from "@/lib/types/coromon";
-
-// Revalidate every day at most
-export const revalidate = 60 * 60 * 24
+import { unstable_cache } from "next/cache";
 
 /**
  * Fetch the url for a Coromon's icon from Supabase storage.
@@ -40,31 +38,33 @@ export function getIconUrl(c: Coromon) {
  * @returns {Promise<Object>} An object containing the highest base stats for all Coromon.
  * @throws {Error} Throws an error if there is an issue fetching the Coromon data.
  */
-export async function getMaxStats() {
-    const { data, error } = await supabase
-        .from("coromon")
-        .select(`
-            stat_hp,
-            stat_attack,
-            stat_defense,
-            stat_speed,
-            stat_sp_attack,
-            stat_sp_defense,
-            stat_sp
-        `)
-        .gte("corodex_number", 1);
-    if (error) throw error;
+export const getMaxStats = () =>
+    unstable_cache(
+        async () => {
+            const { data, error } = await supabase
+                .from("coromon")
+                .select(`
+                    stat_hp,
+                    stat_attack,
+                    stat_defense,
+                    stat_speed,
+                    stat_sp_attack,
+                    stat_sp_defense,
+                    stat_sp
+                `)
+                .gte("corodex_number", 1);
+            if (error) throw error;
 
-    // Find the max for each stat
-    const maxStats = {
-        HP: Math.max(...data.map((c: any) => c.stat_hp)),
-        Attack: Math.max(...data.map((c: any) => c.stat_attack)),
-        Defense: Math.max(...data.map((c: any) => c.stat_defense)),
-        Speed: Math.max(...data.map((c: any) => c.stat_speed)),
-        "Sp. Attack": Math.max(...data.map((c: any) => c.stat_sp_attack)),
-        "Sp. Defense": Math.max(...data.map((c: any) => c.stat_sp_defense)),
-        SP: Math.max(...data.map((c: any) => c.stat_sp)),
-    };
-
-    return maxStats;
-}
+            return {
+                HP: Math.max(...data.map((c: any) => c.stat_hp)),
+                Attack: Math.max(...data.map((c: any) => c.stat_attack)),
+                Defense: Math.max(...data.map((c: any) => c.stat_defense)),
+                Speed: Math.max(...data.map((c: any) => c.stat_speed)),
+                "Sp. Attack": Math.max(...data.map((c: any) => c.stat_sp_attack)),
+                "Sp. Defense": Math.max(...data.map((c: any) => c.stat_sp_defense)),
+                SP: Math.max(...data.map((c: any) => c.stat_sp)),
+            };
+        },
+        ["max-stats"],
+        { revalidate: 60 * 60 * 24 }
+    )();

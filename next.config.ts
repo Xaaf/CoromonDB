@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
 
   images: {
     remotePatterns: [
-      new URL("https://hfnzmziajwmomwiinbdn.supabase.co/**")
+      { hostname: "hfnzmziajwmomwiinbdn.supabase.co", protocol: "https" }
     ]
   }
 };

@@ -1,4 +1,5 @@
 import CoromonGrid from "@/app/components/coromon/CoromonGrid";
+import { getCoromon } from "@/lib/utils/coromonUtils";
 
 /**
  * Fetches the initial list of Coromon from the API.
@@ -6,11 +7,7 @@ import CoromonGrid from "@/app/components/coromon/CoromonGrid";
  * @returns {Promise<any[]>} The list of Coromon to display on the page 
  */
 async function getInitialCoromon() {
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/coromon`, 
-        { next: { revalidate: 60 * 60 * 24 } }
-    );
-    const data = await res.json();
+    const data = await getCoromon();
 
     const filtered = data.filter((c: any) => c.corodex_number >= -100);
     const sorted = filtered.sort(
