@@ -3,7 +3,7 @@ import EvolutionChart from "@/app/components/coromon/details/EvolutionChart";
 import { FlashedSkills, LevelUpSkills } from "@/app/components/coromon/details/SkillsList";
 import { AllStatBars } from "@/app/components/coromon/details/StatBar";
 import TraitGrid from "@/app/components/coromon/details/TraitGrid";
-import { typeColors } from "@/lib/types/typeColors";
+import TypeIcon from "@/app/components/ui/TypeIcon";
 
 /**
  * `CoromonDetail` component
@@ -48,12 +48,14 @@ export default async function CoromonDetail({ coromon }: { coromon: any }) {
                             </span>
                         )}
 
-                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${typeColors[coromon.primary_type]}`}>
-                            {coromon.primary_type != "Fusebox" ? coromon.primary_type : "Normal"}
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm font-semibold bg-white/5">
+                            <TypeIcon type={coromon.primary_type} />
+                            {coromon.primary_type !== "Fusebox" ? coromon.primary_type.charAt(0).toUpperCase() + coromon.primary_type.slice(1) : "Normal"}
                         </span>
                         {coromon.secondary_type && (
-                            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${typeColors[coromon.secondary_type]}`}>
-                                {coromon.secondary_type}
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm font-semibold bg-white/10">
+                                <TypeIcon type={coromon.secondary_type} />
+                                {coromon.secondary_type.charAt(0).toUpperCase() + coromon.secondary_type.slice(1)}
                             </span>
                         )}
                     </div>

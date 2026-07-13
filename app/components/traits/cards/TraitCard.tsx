@@ -5,10 +5,13 @@ export function DetailedTraitCard({ trait }: { trait: any }) {
         <Link key={trait.id} href={`/traits/${trait.slug}`}>
             <div className="bg-bg-container rounded-xl p-4 shadow-md/30 hover:shadow-lg/40 cursor-pointer flex flex-col items-center gap-4">
                 <div className="w-full h-ful flex justify-between items-start">
-                    <div>
-                        <h2 className="text-lg font-semibold mb-2">
-                            {trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}
-                        </h2>
+                    <div className="w-full">
+                        <div className="flex justify-between items-start">
+                            <h2 className="text-lg font-semibold mb-2">
+                                {trait.name} {trait.description_plus && <span className="text-sm text-gray-500 dark:text-gray-400">(++)</span>}
+                            </h2>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Chance: {trait.odds}%</span>
+                        </div>
 
                         <p className="text-sm text-gray-500 dark:text-gray-400">
                             {trait.is_active ? "Active" : "Passive"} {trait.is_active && (

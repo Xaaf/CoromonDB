@@ -1,4 +1,4 @@
-import { typeColors } from "@/lib/types/typeColors";
+import TypeIcon from "@/app/components/ui/TypeIcon";
 import { getCoromonFromTrait } from "@/lib/utils/traitUtils";
 import Link from "next/dist/client/link";
 
@@ -98,17 +98,13 @@ export default async function TraitDetail({ trait }: { trait: any }) {
                                             {coromon.corodex_number > 0 ? `#${coromon.corodex_number}` : "#???"} {coromon.name}
                                         </h2>
 
-                                        <span className="text-sm text-gray-500 dark:text-gray-400">Chance: x%</span>
+                                        <span className="text-sm text-gray-500 dark:text-gray-400">Chances: {coromon.odds}%</span>
                                     </div>
 
                                     <p className="flex gap-2">
-                                        <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[coromon.primary_type] || typeColors.Default}`}>
-                                            {coromon.primary_type != "Fusebox" ? coromon.primary_type : "Normal"}
-                                        </span>
+                                        <TypeIcon type={coromon.primary_type} />
                                         {coromon.secondary_type && (
-                                            <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[coromon.secondary_type] || typeColors.Default}`}>
-                                                {coromon.secondary_type}
-                                            </span>
+                                            <TypeIcon type={coromon.secondary_type} />
                                         )}
                                     </p>
                                 </div>

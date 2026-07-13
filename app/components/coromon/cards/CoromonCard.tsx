@@ -1,4 +1,4 @@
-import { typeColors } from "@/lib/types/typeColors";
+import TypeIcon from "@/app/components/ui/TypeIcon";
 import { getIconUrl } from "@/lib/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,13 +25,9 @@ export default function CoromonCard({ coromon }: { coromon: any }) {
                     </h2>
 
                     <p className="flex gap-2">
-                        <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[coromon.primary_type] || typeColors.Default}`}>
-                            {coromon.primary_type != "Fusebox" ? coromon.primary_type : "Normal"}
-                        </span>
+                        <TypeIcon type={coromon.primary_type} />
                         {coromon.secondary_type && (
-                            <span className={`px-2 py-1 rounded-md text-sm font-semibold ${typeColors[coromon.secondary_type] || typeColors.Default}`}>
-                                {coromon.secondary_type}
-                            </span>
+                            <TypeIcon type={coromon.secondary_type} />
                         )}
                     </p>
                 </div>
