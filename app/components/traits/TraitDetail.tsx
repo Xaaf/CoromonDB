@@ -98,7 +98,7 @@ export default async function TraitDetail({ trait }: { trait: any }) {
                                             {coromon.corodex_number > 0 ? `#${coromon.corodex_number}` : "#???"} {coromon.name}
                                         </h2>
 
-                                        <span className="text-sm text-gray-500 dark:text-gray-400">Chance: x%</span>
+                                        <span className="text-sm text-gray-500 dark:text-gray-400">Chances: {coromon.odds}%</span>
                                     </div>
 
                                     <p className="flex gap-2">
